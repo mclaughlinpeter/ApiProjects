@@ -11,6 +11,7 @@ $(document).ready(function () {
             }),
             success: function(data) {
                 addTableRow(data);
+                clearForm();
             }
         })
     });
@@ -20,4 +21,8 @@ var addTableRow = function (reservation) {
     $("table tbody").append("<tr><td>" + reservation.reservationId + "</td><td>"
     + reservation.clientName + "</td><td>"
     + reservation.location + "</td></tr>");
+}
+
+var clearForm = function () {
+    $("#addform")[0].reset();
 }
