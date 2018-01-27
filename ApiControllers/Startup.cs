@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using ApiControllers.Models;
+using Microsoft.Net.Http.Headers;
 
 namespace ApiControllers
 {
@@ -15,7 +16,12 @@ namespace ApiControllers
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IRepository, MemoryRepository>();
-            services.AddMvc().AddXmlDataContractSerializerFormatters();
+            services.AddMvc()
+            .AddXmlDataContractSerializerFormatters()
+            .AddMvcOptions(opts => {
+                opts.FormatterMappings.SetMediaTypeMappingForFormat("xml",
+                new MediaTypeHeaderValue("application/xml"));
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
