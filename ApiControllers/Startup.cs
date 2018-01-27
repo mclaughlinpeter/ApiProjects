@@ -21,6 +21,8 @@ namespace ApiControllers
             .AddMvcOptions(opts => {
                 opts.FormatterMappings.SetMediaTypeMappingForFormat("xml",
                 new MediaTypeHeaderValue("application/xml"));
+                opts.RespectBrowserAcceptHeader = true;
+                opts.ReturnHttpNotAcceptable = true;
             });
         }
 
